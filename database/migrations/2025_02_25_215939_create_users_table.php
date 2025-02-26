@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreignId('department_id')->constrained()->onDelete('cascade');
+            $table->string('photo')->nullable(); 
+            $table->string('phone')->nullable(); 
+            $table->enum('contract_type', ['CDI', 'CDD', 'Stage', 'Freelance'])->default('Stage');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -25,6 +25,10 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
+            'department_id' =>[ 'required|exists:departments,id',],
+            'phone' => ['nullable', 'string', 'max:15'], 
+            'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], 
+            'contract_type' => ['nullable', 'in:CDI,CDD,Stage,Freelance'],
         ];
     }
 }
