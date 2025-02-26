@@ -20,8 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'photo',     // Ajouter la photo
-         'phone',     // Ajouter le téléphone
+        'photo',  
+         'phone',     
          'contract_type', 
     ];
 

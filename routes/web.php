@@ -3,7 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
-
+use App\Http\Controllers\FormationController;
+use App\Http\Controllers\ContratController;
+use App\Http\Controllers\EmploiController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,5 +21,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('departments', DepartmentController::class);
+Route::resource('formations', FormationController::class);
+Route::resource('contrats', ContratController::class);
+Route::resource('emplois', EmploiController::class);
+
 
 require __DIR__.'/auth.php';

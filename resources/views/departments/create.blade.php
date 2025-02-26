@@ -1,6 +1,5 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
-@section('title', 'Ajouter un Département')
 
 @section('content')
 <div class="card">

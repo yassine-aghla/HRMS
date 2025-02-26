@@ -45,6 +45,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DepartmentSeeder::class,
             UserSeeder::class,
+            FormationSeeder::class,
+            EmploiSeeder::class,
         ]);
     }
 }
