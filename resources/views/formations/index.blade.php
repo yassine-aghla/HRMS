@@ -4,8 +4,9 @@
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Liste des Formations</h1>
     <a href="{{ route('formations.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Ajouter une Formation</a>
-    <table class="w-full mt-4 border-collapse border border-gray-200">
-        <thead>
+    
+        <table class="w-full mt-4 table table-striped">
+            <thead class="table-dark">
             <tr class="bg-gray-100">
                 <th class="border px-4 py-2">Titre</th>
                 <th class="border px-4 py-2">Prix</th>

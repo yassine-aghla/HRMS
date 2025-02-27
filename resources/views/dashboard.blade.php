@@ -7,29 +7,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <div class="flex h-screen bg-gray-100">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-lg">
+        <aside class="w-64 bg-gray-800 text-white p-4">
             <div class="p-4 border-b">
-                <h2 class="text-lg font-bold text-gray-700">Tableau de bord</h2>
+                <h2 class="text-lg font-bold text-white">Dashboard</h2>
             </div>
             <nav class="p-4">
                 <ul class="space-y-2">
                     <li>
-                        <a href="{{ route('emplois.index') }}" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-blue-500 hover:text-white">
+                        <a href="{{ route('emplois.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
                              Gérer les emplois
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('formations.index') }}" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-blue-500 hover:text-white">
+                        <a href="{{ route('formations.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
                              Gérer les Formations
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('departments.index') }}" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-blue-500 hover:text-white">
+                        <a href="{{ route('departments.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
                            Gérer les départements
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('contrats.index') }}" class="block px-4 py-2 rounded-lg text-gray-700 hover:bg-blue-500 hover:text-white">
+                        <a href="{{ route('contrats.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
                              Gérer les contrats
                         </a>
                     </li>
@@ -40,7 +40,7 @@
 
         <!-- Main Content -->
         <main class="flex-1 p-6">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">statistiques</h2>
 
             <!-- Statistiques -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
