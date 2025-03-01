@@ -27,7 +27,7 @@ class FormationRequest extends FormRequest
             'prix'=>'required',
             'date_debut'=>'required',
             'date_fin'=>'nullable',
-            'niveau'=>'required|in:Débutant,Intermédiaire,Avancé',
+            'niveau'=>'required',
             'duree'=>'required|integer|min:1',
         ];
     }

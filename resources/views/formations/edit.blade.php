@@ -17,6 +17,16 @@
         <label class="block mt-4 mb-2">Date de début</label>
         <input type="date" name="date_debut" value="{{ $formation->date_debut }}" class="w-full border p-2 rounded" required>
         
+        <label class="block mt-4 mb-2">Niveau</label>
+        <select name="niveau" class="block mt-4 mb-2">
+            <option value="Debutant">Débutant</option>
+            <option value="Intermediaire">Intermédiaire</option>
+            <option value="Avance">Avancé</option>
+      </select>
+
+      <label class="block mt-4 mb-2">duree</label>
+      <input type="number" name="duree" value="{{ $formation->duree }}" class="w-full border p-2 rounded" required>
+
         <button type="submit" class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded">Mettre à jour</button>
     </form>
 </div>

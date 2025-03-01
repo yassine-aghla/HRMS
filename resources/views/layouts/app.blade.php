@@ -28,6 +28,8 @@
                      <li><a href="{{ route('formations.index') }}" class="block py-2 hover:bg-gray-700">Manage Formations</a></li> 
                     <li><a href="{{ route('departments.index') }}" class="block py-2 hover:bg-gray-700">Manage Departments</a></li>
                     <li><a href="{{ route('contrats.index') }}" class="block py-2 hover:bg-gray-700">Manage Contracts</a></li>
+                    <li><a href="{{ route('grades.index') }}" class="block py-2 hover:bg-gray-700">Manage Grade</a></li>
+                    <li><a href="{{ route('employes.index') }}" class="block py-2 hover:bg-gray-700">Manage Employees</a></li>
                 </ul>
             </nav>
         </aside>

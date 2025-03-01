@@ -33,6 +33,16 @@
                              Gérer les contrats
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('grades.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
+                             Gérer les grades
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('employes.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
+                             Gérer les grades
+                        </a>
+                    </li>
                     
                 </ul>
             </nav>
@@ -43,7 +53,7 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-6">statistiques</h2>
 
             <!-- Statistiques -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Card 1 -->
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-xl font-semibold text-gray-600">Total Emplois</h3>
@@ -67,6 +77,21 @@
                     <h3 class="text-xl font-semibold text-gray-600">Total Contrats</h3>
                     <p class="text-3xl font-bold text-red-500">{{ $totalContrats ?? 0 }}</p>
                 </div>
+
+                <!-- Card 5-->
+
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-600">Total Formations</h3>
+                    <p class="text-3xl font-bold text-yellow-500">0</p>
+                </div>
+
+                 <!-- Card 6-->
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-600">Total Grades</h3>
+                    <p class="text-3xl font-bold text-brawn">0</p>
+                </div> 
+
+
             </div>
         </main>
     </div>

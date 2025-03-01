@@ -7,6 +7,8 @@ use App\Http\Controllers\FormationController;
 use App\Http\Controllers\ContratController;
 use App\Http\Controllers\EmploiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GradeController;
+use App\Http\Controllers\EmployeController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,6 +29,7 @@ Route::resource('departments', DepartmentController::class);
 Route::resource('formations', FormationController::class);
 Route::resource('contrats', ContratController::class);
 Route::resource('emplois', EmploiController::class);
-
+Route::resource('grades', GradeController::class);
+Route::resource('employes', EmployeController::class);
 
 require __DIR__.'/auth.php';

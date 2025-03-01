@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Emploi;
 use App\Models\Department;
 use App\Http\Requests\EmploiRequest;
-use Illuminate\Http\Request;
+
 
 class EmploiController extends Controller
 {

@@ -7,8 +7,7 @@
         <p><strong>Nom :</strong> {{ $emploi->name }}</p>
         <p><strong>Département :</strong> {{ $emploi->department->name }}</p>
 
-        <a href="{{ route('emplois.index') }}" class="btn btn-primary">Retour</a>
-        <a href="{{ route('emplois.edit', $emploi) }}" class="btn btn-warning">Modifier</a>
+        <a href="{{ route('emplois.index') }}" class="btn btn-primary px-3 py-1 rounded">Retour</a>
 
         <form action="{{ route('emplois.destroy', $emploi) }}" method="POST" class="d-inline">
             @csrf

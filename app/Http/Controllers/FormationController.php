@@ -15,13 +15,13 @@ class FormationController extends Controller
 
     public function create()
     {
+
         return view('formations.create');
     }
 
     public function store(FormationRequest $request)
     {
-        // var_dump($request);
-        // dd($request);
+       
         $formation=Formation::create($request->validated());
 
         return redirect()->route('formations.index')->with('success', 'Formation créée avec succès.');
@@ -40,7 +40,6 @@ class FormationController extends Controller
     public function update(FormationRequest $request, Formation $formation)
     {
         $formation->update($request->validated());
-        dd($formation);
 
         return redirect()->route('formations.index')->with('success', 'Formation mise à jour.');
     }

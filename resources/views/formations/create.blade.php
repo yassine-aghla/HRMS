@@ -5,7 +5,6 @@
     <h1 class="text-2xl font-bold mb-4">Créer une Formation</h1>
     <form action="{{ route('formations.store') }}" method="POST" class="bg-white p-6 rounded shadow-md">
         @csrf
-        @method('POST')
         <label class="block mb-2">Titre</label>
         <input type="text" name="titre" class="w-full border p-2 rounded" required>
         
@@ -28,7 +27,7 @@
       <label class="block mt-4 mb-2">duree</label>
       <input type="number" name="duree" class="w-full border p-2 rounded" required>
 
-        <button type="submit"name="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Créer</button>
+        <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Créer</button>
     </form>
 </div>
 @endsection
