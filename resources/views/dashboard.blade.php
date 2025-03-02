@@ -40,7 +40,7 @@
                     </li>
                     <li>
                         <a href="{{ route('employes.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
-                             Gérer les grades
+                             Gérer les employees
                         </a>
                     </li>
                     
@@ -82,13 +82,13 @@
 
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-xl font-semibold text-gray-600">Total Formations</h3>
-                    <p class="text-3xl font-bold text-yellow-500">0</p>
+                    <p class="text-3xl font-bold text-yellow-500">{{$totalFormation}}</p>
                 </div>
 
                  <!-- Card 6-->
                  <div class="bg-white p-6 rounded-lg shadow-md">
                     <h3 class="text-xl font-semibold text-gray-600">Total Grades</h3>
-                    <p class="text-3xl font-bold text-brawn">0</p>
+                    <p class="text-3xl font-bold text-brawn">{{$totalGrade}}</p>
                 </div> 
 
 

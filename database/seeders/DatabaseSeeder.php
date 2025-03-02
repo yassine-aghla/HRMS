@@ -11,36 +11,35 @@ use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $roles = ['Admin', 'HR', 'Manager', 'Employé'];
+        foreach ($roles as $role) {
+            if (!Role::where('name', $role)->exists()) {
+                Role::create(['name' => $role]);
+            }
+        }
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        if (!Role::where('name', 'Admin')->exists()) {
-            Role::create(['name' => 'Admin']);
+        
+        $permissions = ['manage_departments', 'manage_formations', 'manage_contrats', 'manage_grades'];
+        foreach ($permissions as $permission) {
+            if (!Permission::where('name', $permission)->exists()) {
+                Permission::create(['name' => $permission]);
+            }
         }
-    
-        if (!Role::where('name', 'HR')->exists()) {
-            Role::create(['name' => 'HR']);
-        }
-    
-        if (!Role::where('name', 'Manager')->exists()) {
-            Role::create(['name' => 'Manager']);
-        }
-    
-        if (!Role::where('name', 'Employé')->exists()) {
-            Role::create(['name' => 'Employé']);
-        }
-    
-        if (!Permission::where('name', 'manage users')->exists()) {
-            Permission::create(['name' => 'manage users']);
-        }
+
+        
+        $user = User::find(1); 
+        $user->assignRole('Admin');
+
+        $admin = Role::findByName('admin');
+        $admin->givePermissionTo(['manage_departments', 'manage_formations', 'manage_contrats', 'manage_grades']);
+
+    $rh = Role::findByName('HR');
+    $rh->givePermissionTo(['manage_formations', 'manage_contrats', 'manage_grades']);
+
+    $manager = Role::findByName('manager');
+    $manager->givePermissionTo(['manage_grades']);
 
         $this->call([
             DepartmentSeeder::class,
@@ -49,4 +48,7 @@ class DatabaseSeeder extends Seeder
             EmploiSeeder::class,
         ]);
     }
+
+
+      
 }
