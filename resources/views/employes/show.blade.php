@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+   <h3>Rôle: {{ $employe->getRoleNames()->join(', ') }}</h3>
     <div class="container mx-auto py-8">
         <div class="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Détails de l'Employé</h2>
@@ -69,7 +70,75 @@
                     </div>
                 </div>
             </div>
-            
+
+            <div class="mt-4 flex justify-end">
+                <button id="enrollerButton" class="bg-green-500 text-white px-4 py-2 rounded-md shadow hover:bg-green-600">
+                    Enroller
+                </button>
+            </div>
+
+
+            <!-- Formulaire de modification caché -->
+<div id="modificationForm" class="hidden mt-6 bg-white p-6 rounded-lg shadow-lg">
+    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Modifier les informations</h3>
+
+    <form action="{{ route('employes.updatePartielle', $employe->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <div class="mb-4">
+            <label for="emploi" class="block text-sm font-medium text-gray-700">Emploi</label>
+            <select id="emploi" name="emploi" class="border border-gray-300 p-2 rounded-md w-full">
+                @foreach($emplois as $emploi)
+                    <option value="{{ $emploi->id }}" {{ $employe->emploi_id == $emploi->id ? 'selected' : '' }}>
+                        {{ $emploi->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="contrat" class="block text-sm font-medium text-gray-700">Contrat</label>
+            <select id="contrat" name="contrat" class="border border-gray-300 p-2 rounded-md w-full">
+                @foreach($contrats as $contrat)
+                    <option value="{{ $contrat->id }}" {{ $employe->contrat_id == $contrat->id ? 'selected' : '' }}>
+                        {{ $contrat->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="grade" class="block text-sm font-medium text-gray-700">Grade</label>
+            <select id="grade" name="grade" class="border border-gray-300 p-2 rounded-md w-full">
+                @foreach($grades as $grade)
+                    <option value="{{ $grade->id }}" {{ $employe->grade_id == $grade->id ? 'selected' : '' }}>
+                        {{ $grade->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="formation" class="block text-sm font-medium text-gray-700">Formation</label>
+            <select id="formation" name="formation" class="border border-gray-300 p-2 rounded-md w-full">
+                @foreach($formations as $formation)
+                    <option value="{{ $formation->id }}" {{ $employe->formation_id == $formation->id ? 'selected' : '' }}>
+                        {{ $formation->titre }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="flex justify-end mt-4">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600">
+                Sauvegarder
+            </button>
+        </div>
+    </form>
+</div>
+
+
             <div class="flex items-center space-x-6 mb-6">
                 <div>
                     @if ($employe->photo)
@@ -128,4 +197,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('enrollerButton').addEventListener('click', function() {
+            const form = document.getElementById('modificationForm');
+            form.classList.toggle('hidden');
+        });
+    </script>
 @endsection

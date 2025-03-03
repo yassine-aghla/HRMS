@@ -8,7 +8,9 @@ use App\Models\Contrat;
 use App\Models\Formation;
 use App\Models\Emploi;
 use App\Models\Grade; 
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+
 
 class EmployeController extends Controller
 {
@@ -30,8 +32,9 @@ class EmployeController extends Controller
         $emplois = Emploi::all(); 
         $grades = Grade::all(); 
         $formations = Formation::all();
+        $roles = Role::all();
 
-        return view('employes.create', compact('departments', 'Contrat', 'emplois', 'grades', 'formations'));
+        return view('employes.create', compact('departments', 'Contrat', 'emplois', 'grades', 'formations','roles'));
     }
 
     
@@ -51,6 +54,14 @@ class EmployeController extends Controller
         if ($request->has('formations')) {
             $employe->formations()->sync($request->formations);
         }
+
+         if ($request->has('role')) {
+            $role = Role::where('name', $request->role)->first();
+        if ($role) {
+            $employe->assignRole($role);
+            
+        }
+    }
     
         return redirect()->route('employes.index')->with('success', 'Employé créé avec succès!');
     }
@@ -82,7 +93,7 @@ class EmployeController extends Controller
             $imagePath = $request->file('photo')->store('employes', 'public');
             $employe->photo = $imagePath;
         }
-    
+         
         $employe->save();
     
         
@@ -114,16 +125,28 @@ class EmployeController extends Controller
     
     
     public function show($id)
-{
-
-    $employe = Employe::with('department', 'Contrat','emploi', 'grade', 'formations')->findOrFail($id);
-    $data = $this->calculerEtapes($employe);
-    return view('employes.show', [
-        'employe' => $employe,
-        'progression' => $data['progression'],
-        'etapes' => $data['etapes']
-    ]);
-}
+    {
+        $employe = Employe::with(['department', 'Contrat', 'emploi', 'grade', 'formations'])->findOrFail($id);
+        
+        // Récupérer les dernières formations, emplois, contrats et grades
+        $emplois = Emploi::all();
+        $contrats = Contrat::all();
+        $grades = Grade::all();
+        $formations = Formation::orderBy('date_debut', 'desc')->get();
+    
+        // Calculer les étapes pour la barre de progression
+        $data = $this->calculerEtapes($employe);
+    
+        return view('employes.show', [
+            'employe' => $employe,
+            'progression' => $data['progression'],
+            'etapes' => $data['etapes'],
+            'emplois' => $emplois,
+            'contrats' => $contrats,
+            'grades' => $grades,
+            'formations' => $formations
+        ]);
+    }
 
     public function destroy($id)
     {
@@ -131,4 +154,38 @@ class EmployeController extends Controller
         $employe->delete();
         return redirect()->route('employes.index')->with('success', 'Employé supprimé avec succès!');
     }
+
+    public function updatePartielle(Request $request, $id)
+{
+    // Trouver l'employé
+    $employe = Employe::findOrFail($id);
+
+    // Validation des champs reçus dans la requête
+    $request->validate([
+        'grade_id' => 'nullable|exists:grades,id',
+        'emploi_id' => 'nullable|exists:emplois,id',
+        'contrat_id' => 'nullable|exists:contrats,id',
+        // 'formation_id' => 'nullable|exists:formations,id',
+    ]);
+
+    if ($request->has('grade_id')) {
+        $employe->grade_id = $request->input('grade_id');
+    }
+
+    if ($request->has('emploi_id')) {
+        $employe->emploi_id = $request->input('emploi_id');
+    }
+
+    if ($request->has('contrat_id')) {
+        $employe->contrat_id = $request->input('contrat_id');
+    }
+
+    if ($request->has('formation_id')) {
+        $employe->formation_id = $request->input('formation_id');
+    }
+
+    $employe->save();
+    return redirect()->route('employes.show', $employe->id)->with('success', 'Les informations ont été mises à jour avec succès!');
+}
+
 }

@@ -5,9 +5,9 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Liste des Départements</h2>
-    {{-- @can('department-create') --}}
+    @can('department-create')
     <a href="{{ route('departments.create') }}" class="btn btn-primary">+ Ajouter</a>
-    {{-- @endcan --}}
+    @endcan
 </div>
 
 <table class="table table-striped">

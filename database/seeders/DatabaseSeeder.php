@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Employe;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,7 +22,7 @@ class DatabaseSeeder extends Seeder
         }
 
         
-        $permissions = ['manage_departments', 'manage_formations', 'manage_contrats', 'manage_grades'];
+        $permissions = ['manage_departments', 'manage_formations', 'manage_contrats', 'manage_grades','manage_emploi','manage_employe'];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {
                 Permission::create(['name' => $permission]);
@@ -31,15 +32,13 @@ class DatabaseSeeder extends Seeder
         
         $user = User::find(1); 
         $user->assignRole('Admin');
-
         $admin = Role::findByName('admin');
-        $admin->givePermissionTo(['manage_departments', 'manage_formations', 'manage_contrats', 'manage_grades']);
+        $admin->givePermissionTo(['manage_departments', 'manage_formations', 'manage_contrats', 'manage_grades','manage_emploi','manage_emploi']);
+        $rh = Role::findByName('HR');
+        $rh->givePermissionTo(['manage_formations', 'manage_contrats', 'manage_grades']);
 
-    $rh = Role::findByName('HR');
-    $rh->givePermissionTo(['manage_formations', 'manage_contrats', 'manage_grades']);
-
-    $manager = Role::findByName('manager');
-    $manager->givePermissionTo(['manage_grades']);
+        $manager = Role::findByName('manager');
+        $manager->givePermissionTo(['manage_grades']);
 
         $this->call([
             DepartmentSeeder::class,

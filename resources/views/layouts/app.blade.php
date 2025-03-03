@@ -23,13 +23,26 @@
             <h2 class="text-2xl font-bold mb-6">Dashboard</h2>
             <nav>
                 <ul>
+                  
                     <li><a href="{{ route('dashboard') }}" class="block py-2 hover:bg-gray-700">Dashboard</a></li>
-                    <li><a href="{{ route('emplois.index') }}" class="block py-2 hover:bg-gray-700">Manage Jobs</a></li>
+                    @can('manage_emploi')
+                  <li><a href="{{ route('emplois.index') }}" class="block py-2 hover:bg-gray-700">Manage Jobs</a></li>
+                  @endcan
+                @can('manage_formations')
                      <li><a href="{{ route('formations.index') }}" class="block py-2 hover:bg-gray-700">Manage Formations</a></li> 
+                     @endcan
+                     @can('manage_departments')
                     <li><a href="{{ route('departments.index') }}" class="block py-2 hover:bg-gray-700">Manage Departments</a></li>
+                    @endcan
+                    @can('manage_contrats')
                     <li><a href="{{ route('contrats.index') }}" class="block py-2 hover:bg-gray-700">Manage Contracts</a></li>
+                    @endcan
+                    @can('manage_grades')
                     <li><a href="{{ route('grades.index') }}" class="block py-2 hover:bg-gray-700">Manage Grade</a></li>
+                    @endcan
+                    @can('manage_employe')
                     <li><a href="{{ route('employes.index') }}" class="block py-2 hover:bg-gray-700">Manage Employees</a></li>
+                    @endcan
                 </ul>
             </nav>
         </aside>

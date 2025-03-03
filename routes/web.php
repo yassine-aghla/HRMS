@@ -25,11 +25,28 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('departments', DepartmentController::class);
-Route::resource('formations', FormationController::class);
-Route::resource('contrats', ContratController::class);
-Route::resource('emplois', EmploiController::class);
-Route::resource('grades', GradeController::class);
-Route::resource('employes', EmployeController::class);
+Route::middleware('role:Admin|HR|Manager')->group(function(){
+    Route::resource('grades', GradeController::class);
+});
+
+Route::middleware('role:Admin|HR')->group(function(){
+    Route::resource('formations', FormationController::class);
+    Route::resource('contrats', ContratController::class);
+    // Route::resource('grades', GradeController::class);
+});
+
+
+
+Route::middleware('role:Admin')->group(function(){
+    Route::resource('departments', DepartmentController::class);
+    //  Route::resource('formations', FormationController::class);
+    // Route::resource('contrats', ContratController::class);
+    Route::resource('emplois', EmploiController::class);
+    //  Route::resource('grades', GradeController::class);
+    Route::put('/employes/{id}/update-partielle', [EmployeController::class, 'updatePartielle'])->name('employes.updatePartielle');
+    Route::resource('employes', EmployeController::class);
+});
+
+
 
 require __DIR__.'/auth.php';

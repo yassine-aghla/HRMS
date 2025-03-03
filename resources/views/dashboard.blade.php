@@ -13,36 +13,25 @@
             </div>
             <nav class="p-4">
                 <ul class="space-y-2">
-                    <li>
-                        <a href="{{ route('emplois.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
-                             Gérer les emplois
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('formations.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
-                             Gérer les Formations
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('departments.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
-                           Gérer les départements
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('contrats.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
-                             Gérer les contrats
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('grades.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
-                             Gérer les grades
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('employes.index') }}" class="block px-4 py-2 rounded-lg text-white hover:bg-blue-500 hover:text-white">
-                             Gérer les employees
-                        </a>
-                    </li>
+                    <li><a href="{{ route('dashboard') }}" class="block py-2 hover:bg-gray-700">Dashboard</a></li>
+                   @can('manage_emploi')
+                  <li><a href="{{ route('emplois.index') }}" class="block py-2 hover:bg-gray-700">Manage Jobs</a></li>
+                    @endcan
+                    @can('manage_formations')
+                     <li><a href="{{ route('formations.index') }}" class="block py-2 hover:bg-gray-700">Manage Formations</a></li> 
+                     @endcan
+                     @can('manage_departments')
+                    <li><a href="{{ route('departments.index') }}" class="block py-2 hover:bg-gray-700">Manage Departments</a></li>
+                    @endcan
+                    @can('manage_contrats')
+                    <li><a href="{{ route('contrats.index') }}" class="block py-2 hover:bg-gray-700">Manage Contracts</a></li>
+                    @endcan
+                    @can('manage_grades')
+                    <li><a href="{{ route('grades.index') }}" class="block py-2 hover:bg-gray-700">Manage Grade</a></li>
+                    @endcan
+                    @can('manage_employe')
+                    <li><a href="{{ route('employes.index') }}" class="block py-2 hover:bg-gray-700">Manage Employees</a></li>
+                    @endcan
                     
                 </ul>
             </nav>

@@ -13,6 +13,7 @@
                     <tr>
                         <th class="px-4 py-2 text-left">Nom</th>
                         <th class="px-4 py-2 text-left">Prenom</th>
+                        <th class="px-4 py-2 text-left">Role</th>
                         <th class="px-4 py-2 text-left">Photo</th>
                         
                         <th class="px-4 py-2 text-left">Salaire</th>
@@ -25,6 +26,7 @@
                         <tr class="border-b">
                             <td class="px-4 py-2">{{ $employee->nom }}</td>
                             <td class="px-4 py-2">{{ $employee->prenom }}</td>
+                            <td class="px-4 py-2">{{ $employee->getRoleNames()->join(', ') }}</td>
                             <td class="px-4 py-2">
                                 @if($employee->photo)
                                     <img src="{{ asset('storage/' . $employee->photo) }}" alt="Photo de {{ $employee->nom }}" class="w-16 h-16 object-cover rounded-full">

@@ -5,13 +5,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Employe extends Model
 {
-    use HasFactory;
+    use HasFactory,HasRoles;
 
     protected $fillable = ['nom', 'prenom','photo','phone','salaire', 'contrat_id', 'department_id', 'emploi_id', 'grade_id'];
 
+    protected $guard_name = ["web"];
+    
     public function contrat()
     {
         return $this->belongsTo(Contrat::class);
@@ -34,4 +38,5 @@ class Employe extends Model
     {
         return $this->belongsToMany(Formation::class, 'employe_formation');
     }
+    
 }
