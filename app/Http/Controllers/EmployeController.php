@@ -97,7 +97,13 @@ class EmployeController extends Controller
         $employe = Employe::findOrFail($id);
         $employe->fill($request->validated());
     
-        
+        $user = $employe->user;
+    $user->email = $request->email;
+    if ($request->password) {
+        $user->password = bcrypt($request->password);
+    }
+    $user->save();
+
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('employes', 'public');
             $employe->photo = $imagePath;
@@ -112,12 +118,12 @@ class EmployeController extends Controller
         
         if ($request->has('role')) {
             $role = Role::where('name', $request->role)->first();
-
         if ($role) {
-            $employe->assignRole($role);
+            $user->assignRole($role);
             
         }
     }
+
         return redirect()->route('employes.index')->with('success', 'Employé mis à jour avec succès!');
     }
 
@@ -204,5 +210,20 @@ class EmployeController extends Controller
     $employe->save();
     return redirect()->route('employes.show', $employe->id)->with('success', 'Les informations ont été mises à jour avec succès!');
 }
+public function organigramme()
+{
+    
+    $employees = Employe::has('user')->with('user.roles', 'department', 'emploi', 'contrat')->get();
 
+  
+    $groupedEmployees = [];
+
+    foreach ($employees as $employee) {
+        foreach ($employee->user->roles as $role) {
+            $groupedEmployees[$role->name][] = $employee;
+        }
+    }
+
+    return view('employes.organigramme', compact('groupedEmployees'));
+}
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-   <h3>Rôle: {{ $employe->getRoleNames()->join(', ') }}</h3>
+
     <div class="container mx-auto py-8">
         <div class="bg-white shadow-lg rounded-lg p-6 max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-gray-800 mb-4 text-center">Détails de l'Employé</h2>
@@ -56,7 +56,7 @@
                         <p class="text-sm  text-blue-800">{{$employe->grade->created_at}}</p>
                         <div class="w-8 h-8 rounded-full flex items-center justify-center 
                             {{ $etapes['emploi'] ? 'bg-green-500' : 'bg-gray-300' }}">
-                            2
+                            4
                         </div>
                         <p class="text-sm">{{$employe->grade->name}}</p>
                     </div>

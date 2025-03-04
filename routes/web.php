@@ -45,6 +45,7 @@ Route::middleware('role:Admin')->group(function(){
     //  Route::resource('grades', GradeController::class);
     Route::put('/employes/{id}/update-partielle', [EmployeController::class, 'updatePartielle'])->name('employes.updatePartielle');
     Route::resource('employes', EmployeController::class);
+    Route::get('/organigramme', [EmployeController::class, 'organigramme'])->name('employes.organigramme');
 });
 
 

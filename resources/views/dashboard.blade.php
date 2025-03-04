@@ -32,6 +32,7 @@
                     @endcan
                     @can('manage_employe')
                     <li><a href="{{ route('employes.index') }}" class="block py-2 hover:bg-gray-700">Manage Employees</a></li>
+                    <li><a href="{{ route('employes.organigramme') }}" class="block py-2 hover:bg-gray-700">Organigramme</a></li>
                     @endcan
                     
                 </ul>
