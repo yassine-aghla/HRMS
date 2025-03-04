@@ -24,6 +24,7 @@ class User extends Authenticatable
         'photo',  
          'phone',     
          'contract_type', 
+         
     ];
 
     /**

@@ -8,6 +8,7 @@ use App\Models\Contrat;
 use App\Models\Formation;
 use App\Models\Emploi;
 use App\Models\Grade; 
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,10 @@ class EmployeController extends Controller
     public function index()
     {
         
-        $employees = Employe::with('department', 'Contrat', 'emploi', 'grade', 'formations')->get();
+        $employees = Employe::with('department', 'Contrat', 'emploi', 'grade', 'formations','user.roles')->get();
 
         return view('employes.index', compact('employees'));
+
     }
 
     
@@ -35,13 +37,20 @@ class EmployeController extends Controller
         $roles = Role::all();
 
         return view('employes.create', compact('departments', 'Contrat', 'emplois', 'grades', 'formations','roles'));
+
     }
 
     
     public function store(EmployeRequest $request)
     {
-        $employe = new Employe($request->validated());
+        $user = User::create([
+            'name' => $request->nom . ' ' . $request->prenom,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
 
+        $employe = new Employe($request->validated());
+        $employe->user_id = $user->id;
        
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('employes', 'public');
@@ -58,7 +67,7 @@ class EmployeController extends Controller
          if ($request->has('role')) {
             $role = Role::where('name', $request->role)->first();
         if ($role) {
-            $employe->assignRole($role);
+            $user->assignRole($role);
             
         }
     }
@@ -100,7 +109,15 @@ class EmployeController extends Controller
         if ($request->has('formations')) {
             $employe->formations()->sync($request->formations);
         }
-    
+        
+        if ($request->has('role')) {
+            $role = Role::where('name', $request->role)->first();
+
+        if ($role) {
+            $employe->assignRole($role);
+            
+        }
+    }
         return redirect()->route('employes.index')->with('success', 'Employé mis à jour avec succès!');
     }
 

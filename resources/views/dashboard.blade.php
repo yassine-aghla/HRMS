@@ -11,6 +11,7 @@
             <div class="p-4 border-b">
                 <h2 class="text-lg font-bold text-white">Dashboard</h2>
             </div>
+            
             <nav class="p-4">
                 <ul class="space-y-2">
                     <li><a href="{{ route('dashboard') }}" class="block py-2 hover:bg-gray-700">Dashboard</a></li>

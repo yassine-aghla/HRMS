@@ -12,9 +12,14 @@ class Employe extends Model
 {
     use HasFactory,HasRoles;
 
-    protected $fillable = ['nom', 'prenom','photo','phone','salaire', 'contrat_id', 'department_id', 'emploi_id', 'grade_id'];
+    protected $fillable = ['nom', 'prenom','photo','phone','salaire', 'contrat_id', 'department_id', 'emploi_id', 'grade_id','user_id'];
 
     protected $guard_name = ["web"];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     
     public function contrat()
     {

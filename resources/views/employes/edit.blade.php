@@ -34,7 +34,15 @@
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
             </div>
-
+            <div class="mb-4">
+                <label for="role">Sélectionner un rôle</label>
+                <select name="role" class="form-control" required>
+        <option value="">-- Sélectionner un rôle --</option>
+        @foreach(\Spatie\Permission\Models\Role::all() as $role)
+            <option value="{{ $role->name }}">{{ $role->name }}</option>
+        @endforeach
+    </select>
+                </div>
             <div class="mb-4">
                 <label for="department_id" class="block text-sm font-medium text-gray-700">Département</label>
                 <select id="department_id" name="department_id" class="w-full px-4 py-2 border rounded-md">
