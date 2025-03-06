@@ -48,6 +48,7 @@
                             <td class="px-4 py-2 text-center">
                                 <a href="{{ route('employes.edit', $employee->id) }}" class="text-yellow-500 hover:text-yellow-700">Éditer</a> 
                                 <a href="{{ route('employes.show', $employee->id) }}" class="text-blue-500">Voir</a> 
+                                <a href="{{ route('employe.carriere', $employee->id) }}" class="text-green-500 hover:text-green-700">Cursus</a>
                                 <form action="{{ route('employes.destroy', $employee->id) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')

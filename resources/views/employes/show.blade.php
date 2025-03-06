@@ -203,5 +203,6 @@
             const form = document.getElementById('modificationForm');
             form.classList.toggle('hidden');
         });
+        
     </script>
 @endsection

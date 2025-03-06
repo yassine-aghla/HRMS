@@ -9,6 +9,8 @@ use App\Http\Controllers\EmploiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\EmployeController;
+use App\Http\Controllers\CarriereController;
+use App\Http\Controllers\CongeController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,6 +29,13 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('role:Admin|HR|Manager')->group(function(){
     Route::resource('grades', GradeController::class);
+    Route::get('/conges', [CongeController::class, 'index'])->name('conges.index');
+    Route::get('/conges/create', [CongeController::class, 'create'])->name('conges.create');
+    Route::post('/conges', [CongeController::class, 'store'])->name('conges.store');
+
+    Route::patch('/conges/{id}/valider-manager', [CongeController::class, 'validerManager'])->name('conges.validerManager');
+    Route::patch('/conges/{id}/valider-rh', [CongeController::class, 'validerRH'])->name('conges.validerRH');
+    Route::patch('/conges/{id}/refuser', [CongeController::class, 'refuser'])->name('conges.refuser');
 });
 
 Route::middleware('role:Admin|HR')->group(function(){
@@ -46,6 +55,9 @@ Route::middleware('role:Admin')->group(function(){
     Route::put('/employes/{id}/update-partielle', [EmployeController::class, 'updatePartielle'])->name('employes.updatePartielle');
     Route::resource('employes', EmployeController::class);
     Route::get('/organigramme', [EmployeController::class, 'organigramme'])->name('employes.organigramme');
+    Route::get('/employe/{id}/carriere', [CarriereController::class, 'show'])->name('employe.carriere');
+    Route::get('/employe/{id}/carriere/edit', [CarriereController::class, 'edit'])->name('employe.carriere.edit');
+    Route::put('/employe/{id}/carriere/update', [CarriereController::class, 'update'])->name('employe.carriere.update');
 });
 
 

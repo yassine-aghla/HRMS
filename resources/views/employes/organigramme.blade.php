@@ -9,9 +9,9 @@
             <h2 class="text-xl font-bold mb-2">Les RH</h2>
             <!-- HR -->
             @if(isset($groupedEmployees['HR']))
-                <div class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md mb-4">
+                <div class="flex space-x-8 justify-between">
                     @foreach($groupedEmployees['HR'] as $hr)
-                        <div class="flex flex-col items-center">
+                        <div class="flex flex-col items-center bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md mb-4">
                             <!-- Photo -->
                             @if($hr->photo)
                                 <img src="{{ asset('storage/' . $hr->photo) }}" alt="Photo de {{ $hr->nom }}" class="w-16 h-16 object-cover rounded-full mb-2">

@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 class Employe extends Model
 {
     use HasFactory,HasRoles;
 
-    protected $fillable = ['nom', 'prenom','photo','phone','salaire', 'contrat_id', 'department_id', 'emploi_id', 'grade_id','user_id'];
+    protected $fillable = ['nom', 'prenom','photo','phone','salaire','contrat_id', 'department_id', 'emploi_id', 'grade_id','user_id'];
 
     protected $guard_name = ["web"];
 
@@ -43,5 +44,20 @@ class Employe extends Model
     {
         return $this->belongsToMany(Formation::class, 'employe_formation');
     }
+    public function carriere()
+    {
+        return $this->hasOne(Carriere::class);
+    }
+    
+    public function conges()
+    {
+        return $this->hasMany(Conge::class);
+    }
+
+
+    public function congesToValidate()
+    {
+        return $this->hasMany(Conge::class, 'validator_id');
+    } 
     
 }

@@ -210,7 +210,7 @@ class EmployeController extends Controller
     $employe->save();
     return redirect()->route('employes.show', $employe->id)->with('success', 'Les informations ont été mises à jour avec succès!');
 }
-public function organigramme()
+ public function organigramme()
 {
     
     $employees = Employe::has('user')->with('user.roles', 'department', 'emploi', 'contrat')->get();
