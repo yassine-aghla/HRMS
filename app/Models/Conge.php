@@ -13,7 +13,7 @@ class Conge extends Model
 
     public function employe()
     {
-        return $this->belongsTo(Employe::class);
+        return $this->belongsTo(Employe::class, 'employe_id');
     }
 
     // Relation avec le validateur 

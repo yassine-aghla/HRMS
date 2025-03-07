@@ -226,4 +226,5 @@ class EmployeController extends Controller
 
     return view('employes.organigramme', compact('groupedEmployees'));
 }
+
 }

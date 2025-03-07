@@ -50,7 +50,7 @@ class CongeController extends Controller
     {
 
         $request->validate([
-            'date_debut' => 'required|date|after:' . now()->addDays(6)->toDateString(),
+            'date_debut' => 'required|date',
             'date_fin' => 'required|date|after:date_debut',
             'motif' => 'required|string|max:255',
         ]);
@@ -79,7 +79,7 @@ class CongeController extends Controller
         $conge = Conge::findOrFail($id);
         $user = Auth::user();
 
-    // Vérifier si le demandeur est un manager
+
     if ($conge->employe->user->hasRole('Manager')) {
         return redirect()->back()->withErrors("Les managers ne peuvent pas valider les congés d'autres managers.");
     }
@@ -97,16 +97,26 @@ class CongeController extends Controller
 {
     $conge = Conge::findOrFail($id);
 
-    // Si le congé est déjà validé par un manager, on continue normalement
+    
     if ($conge->statut === 'validé_manager') {
         $conge->statut = 'validé_rh';
+        $employe = $conge->employe;
+        $employe->mettreAJourSoldeConges();
         $conge->save();
         return redirect()->back()->with('success', 'Congé validé par le service RH.');
     }
 
-    // Si c'est un manager qui a fait la demande, le RH peut valider directement
     if ($conge->employe->user->hasRole('Manager') && $conge->statut === 'en attente') {
+    //    dd();
         $conge->statut = 'validé_rh';
+        $employe = $conge->employe;
+        // echo "<pre>";
+        // print_r($employe);
+        // echo "<\pre>";
+        // die;
+        $employe->mettreAJourSoldeConges();
+        // dd($employe->mettreAJourSoldeConges());
+    
         $conge->save();
         return redirect()->back()->with('success', 'Congé validé directement par le service RH.');
     }
@@ -129,16 +139,28 @@ class CongeController extends Controller
     return redirect()->back()->with('success', 'Votre demande de congé a été annulée.');
 }
 
+public function refuser($id)
+    {
+        $conge = Conge::findOrFail($id);
+        $conge->statut = 'refusé';
+        $conge->save();
+
+        return redirect()->back()->with('success', 'Demande de congé refusée.');
+    }
+
+
+
 public function soldeConges()
 {
     $employe = Auth::user()->employe;
+    // var_dump($employe);
+    // die;
 
     if (!$employe) {
         return redirect()->route('conges.index')->withErrors("Vous n'êtes pas un employé.");
     }
 
-    $soldeConges = $employe->solde_conges;
-
+    $soldeConges =intval($employe->solde_conges);
     return view('conges.solde', compact('soldeConges'));
 }
 }

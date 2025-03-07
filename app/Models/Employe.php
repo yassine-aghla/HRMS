@@ -67,21 +67,21 @@ class Employe extends Model
         $dateEmbauche = Carbon::parse($this->date_embauche);
         $aujourdHui = Carbon::now();
         $difference = $dateEmbauche->diffInMonths($aujourdHui);
-
-        if ($difference >= 12) {
-            
-            $anneesSupplementaires = $difference / 12 - 1;
-            $solde = 18 + ($anneesSupplementaires * 0.5);
-        } else {
-
-            $solde = $difference * 1.5;
+      
+       
+        if ($difference < 12) {
+            return $difference * 1.5; 
         }
 
-        return $solde;
+       
+        $annees = $dateEmbauche->diffInYears($aujourdHui);
+        $solde = 18 + ($annees - 1) * 0.5; 
+         return $solde;
     }
 
     public function mettreAJourSoldeConges()
     {
+       
         $this->solde_conges = $this->calculerSoldeConges();
         $this->save();
     }
