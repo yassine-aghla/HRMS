@@ -40,6 +40,7 @@ class EmployeRequest extends FormRequest
             // Validation pour le champ 'photo'
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Optionnel, et doit être une image avec les extensions spécifiées et taille max de 2MB
              'role' => 'required|string|exists:roles,name',
+             'date_embauche' => 'required|date',
 
             // Validation pour le champ 'formations'
             'formations' => 'nullable|array', 

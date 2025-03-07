@@ -39,11 +39,14 @@
                     @endcan
                     @can('manage_grades')
                     <li><a href="{{ route('grades.index') }}" class="block py-2 hover:bg-gray-700">Manage Grade</a></li>
+                    <li><a href="{{ route('conges.index') }}" class="block py-2 hover:bg-gray-700">Manage Conge</a></li>
                     @endcan
                     @can('manage_employe')
                     <li><a href="{{ route('employes.index') }}" class="block py-2 hover:bg-gray-700">Manage Employees</a></li>
                     <li><a href="{{ route('employes.organigramme') }}" class="block py-2 hover:bg-gray-700">Organigramme</a></li>
+                    
                     @endcan
+                    <li><a href="{{ route('conges.create') }}" class="block py-2 hover:bg-gray-700">Demander conge</a></li>
                 </ul>
             </nav>
         </aside>

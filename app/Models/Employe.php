@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
+
 
 
 class Employe extends Model
 {
     use HasFactory,HasRoles;
 
-    protected $fillable = ['nom', 'prenom','photo','phone','salaire','contrat_id', 'department_id', 'emploi_id', 'grade_id','user_id'];
+    protected $fillable = ['nom', 'prenom','photo','phone','salaire','contrat_id', 'department_id', 'emploi_id', 'grade_id','user_id','date_embauche','solde_conges'];
 
     protected $guard_name = ["web"];
 
@@ -59,5 +61,29 @@ class Employe extends Model
     {
         return $this->hasMany(Conge::class, 'validator_id');
     } 
+
+    public function calculerSoldeConges()
+    {
+        $dateEmbauche = Carbon::parse($this->date_embauche);
+        $aujourdHui = Carbon::now();
+        $difference = $dateEmbauche->diffInMonths($aujourdHui);
+
+        if ($difference >= 12) {
+            
+            $anneesSupplementaires = $difference / 12 - 1;
+            $solde = 18 + ($anneesSupplementaires * 0.5);
+        } else {
+
+            $solde = $difference * 1.5;
+        }
+
+        return $solde;
+    }
+
+    public function mettreAJourSoldeConges()
+    {
+        $this->solde_conges = $this->calculerSoldeConges();
+        $this->save();
+    }
     
 }

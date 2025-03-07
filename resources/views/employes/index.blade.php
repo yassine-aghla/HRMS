@@ -18,6 +18,7 @@
                         <th class="px-4 py-2 text-left">Photo</th>
                         
                         <th class="px-4 py-2 text-left">Salaire</th>
+                        <th class="px-4 py-2 text-left">date_embauche</th>
                        
                         <th class="px-4 py-2 text-center">Actions</th>
                     </tr>
@@ -44,6 +45,7 @@
                             </td>
                            
                             <td class="px-4 py-2">{{ $employee->salaire }}</td>
+                            <td class="px-4 py-2"> {{ \Carbon\Carbon::parse($employee->date_embauche)->format('d/m/Y') }}</td>
                         
                             <td class="px-4 py-2 text-center">
                                 <a href="{{ route('employes.edit', $employee->id) }}" class="text-yellow-500 hover:text-yellow-700">Éditer</a> 

@@ -27,11 +27,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('role:Admin|HR|Manager|Employé')->group(function(){
+    Route::get('/conges/create', [CongeController::class, 'create'])->name('conges.create');
+    Route::post('/conges', [CongeController::class, 'store'])->name('conges.store');
+    Route::get('/mes-conges', [CongeController::class, 'index_employe'])->name('conges.index_employe');
+    Route::delete('/conges/{id}/annuler', [CongeController::class, 'annuler'])->name('conges.annuler');
+    Route::get('/conges/solde', [CongeController::class, 'soldeConges'])->name('conges.solde');
+
+});
+
 Route::middleware('role:Admin|HR|Manager')->group(function(){
     Route::resource('grades', GradeController::class);
     Route::get('/conges', [CongeController::class, 'index'])->name('conges.index');
-    Route::get('/conges/create', [CongeController::class, 'create'])->name('conges.create');
-    Route::post('/conges', [CongeController::class, 'store'])->name('conges.store');
+    
+    // Route::get('/conges/create', [CongeController::class, 'create'])->name('conges.create');
+    // Route::post('/conges', [CongeController::class, 'store'])->name('conges.store');
 
     Route::patch('/conges/{id}/valider-manager', [CongeController::class, 'validerManager'])->name('conges.validerManager');
     Route::patch('/conges/{id}/valider-rh', [CongeController::class, 'validerRH'])->name('conges.validerRH');
