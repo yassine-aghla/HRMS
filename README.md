@@ -1,4 +1,4 @@
-##WEB.PHP
+## WEB.PHP
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -58,8 +58,8 @@ Route::middleware('role:Admin')->group(function(){
 
 
 
-###SEEDERS
-##DATABASE SEEDER
+### SEEDERS
+## DATABASE SEEDER
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
