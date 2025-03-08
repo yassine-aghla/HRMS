@@ -134,7 +134,26 @@
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
             </div>
-
+            <div class="mb-4">
+                <label for="date_embauche" class="block text-sm font-medium text-gray-700">Date d'embauche</label>
+                <input type="date" id="date_embauche" name="date_embauche" class="w-full px-4 py-2 border rounded-md" value="{{ old('date_embauche', $employe->date_embauche) }}" required>
+                @error('date_embauche')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="mb-4">
+                <label for="solde_recuperation" class="block text-sm font-medium text-gray-700">Jours de récupération</label>
+                <input 
+                    type="number" 
+                    id="solde_recuperation" 
+                    name="solde_recuperation" 
+                    class="w-full px-4 py-2 border rounded-md" 
+                    value="{{ old('solde_recuperation', $employe->solde_recuperation) }}" 
+                >
+                @error('solde_recuperation')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
             <div class="mb-4">
                 <label for="formations" class="block text-sm font-medium text-gray-700">Formations</label>
                 <select id="formations" name="formations[]" multiple class="w-full px-4 py-2 border rounded-md">

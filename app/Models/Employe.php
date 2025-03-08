@@ -15,7 +15,8 @@ class Employe extends Model
 {
     use HasFactory,HasRoles;
 
-    protected $fillable = ['nom', 'prenom','photo','phone','salaire','contrat_id', 'department_id', 'emploi_id', 'grade_id','user_id','date_embauche','solde_conges'];
+    protected $fillable = ['nom', 'prenom','photo','phone','salaire','contrat_id', 'department_id', 'emploi_id', 'grade_id','user_id','date_embauche',
+    'solde_conges','solde_recuperation'];
 
     protected $guard_name = ["web"];
 
@@ -85,5 +86,11 @@ class Employe extends Model
         $this->solde_conges = $this->calculerSoldeConges();
         $this->save();
     }
+
+    public function mettreAJourSoldeRecuperation($jours)
+{
+    $this->solde_recuperation -= $jours;
+    $this->save();
+}
     
 }

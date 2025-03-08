@@ -161,6 +161,7 @@ public function soldeConges()
     }
 
     $soldeConges =intval($employe->solde_conges);
-    return view('conges.solde', compact('soldeConges'));
+    $soldeRecuperation = intval($employe->solde_recuperation);
+    return view('conges.solde', compact('soldeConges', 'soldeRecuperation'));
 }
 }

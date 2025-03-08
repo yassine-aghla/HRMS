@@ -29,7 +29,10 @@
                   <li><a href="{{ route('emplois.index') }}" class="block py-2 hover:bg-gray-700">Manage Jobs</a></li>
                   @endcan
                 @can('manage_formations')
-                     <li><a href="{{ route('formations.index') }}" class="block py-2 hover:bg-gray-700">Manage Formations</a></li> 
+                     <li><a href="{{ route('formations.index') }}" class="block py-2 hover:bg-gray-700">Manage Formations</a></li>
+                     <a href="{{ route('recuperations.index_rh') }}" class="block py-2 hover:bg-gray-700">
+                        Valider les demandes de récupération
+                    </a> 
                      @endcan
                      @can('manage_departments')
                     <li><a href="{{ route('departments.index') }}" class="block py-2 hover:bg-gray-700">Manage Departments</a></li>
@@ -47,6 +50,11 @@
                     
                     @endcan
                     <li><a href="{{ route('conges.create') }}" class="block py-2 hover:bg-gray-700">Demander conge</a></li>
+                    <li><a href="{{ route('conges.index_employe') }}" class="block py-2 hover:bg-gray-700">Mes conges</a></li>
+                    <li><a href="{{ route('conges.solde') }}" class="block py-2 hover:bg-gray-700">Mon espace personnelle</a></li>
+                    <a href="{{ route('recuperations.create') }}" class="btn btn-primary">
+                        Créer une nouvelle demande de récupération
+                    </a>
                 </ul>
             </nav>
         </aside>

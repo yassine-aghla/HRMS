@@ -51,6 +51,7 @@ class EmployeController extends Controller
 
         $employe = new Employe($request->validated());
         $employe->user_id = $user->id;
+        $employe->solde_recuperation = 0;
        
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('employes', 'public');
@@ -107,6 +108,10 @@ class EmployeController extends Controller
         if ($request->hasFile('photo')) {
             $imagePath = $request->file('photo')->store('employes', 'public');
             $employe->photo = $imagePath;
+        }
+
+        if ($request->has('solde_recuperation')) {
+            $employe->solde_recuperation = $request->solde_recuperation;
         }
          
         $employe->save();

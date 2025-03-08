@@ -11,6 +11,7 @@ use App\Http\Controllers\GradeController;
 use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\CarriereController;
 use App\Http\Controllers\CongeController;
+use App\Http\Controllers\RecuperationController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -33,6 +34,8 @@ Route::middleware('role:Admin|HR|Manager|Employé')->group(function(){
     Route::get('/mes-conges', [CongeController::class, 'index_employe'])->name('conges.index_employe');
     Route::delete('/conges/{id}/annuler', [CongeController::class, 'annuler'])->name('conges.annuler');
     Route::get('/conges/solde', [CongeController::class, 'soldeConges'])->name('conges.solde');
+    Route::resource('recuperations', RecuperationController::class)->only(['index', 'create', 'store']);
+   
 
 });
 
@@ -51,6 +54,9 @@ Route::middleware('role:Admin|HR|Manager')->group(function(){
 Route::middleware('role:Admin|HR')->group(function(){
     Route::resource('formations', FormationController::class);
     Route::resource('contrats', ContratController::class);
+    Route::get('/recuperations/rh', [RecuperationController::class, 'indexRH'])->name('recuperations.index_rh');
+    Route::post('/recuperations/{id}/valider', [RecuperationController::class, 'validerRH'])->name('recuperations.valider');
+    Route::post('/recuperations/{id}/refuser', [RecuperationController::class, 'refuserRH'])->name('recuperations.refuser');
     // Route::resource('grades', GradeController::class);
 });
 

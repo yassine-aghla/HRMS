@@ -126,7 +126,19 @@
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
             </div>
-            
+            <div class="mb-4">
+                <label for="solde_recuperation" class="block text-sm font-medium text-gray-700">Jours de récupération</label>
+                <input 
+                    type="number" 
+                    id="solde_recuperation" 
+                    name="solde_recuperation" 
+                    class="w-full px-4 py-2 border rounded-md" 
+                    value="0" 
+                >
+                @error('solde_recuperation')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
             <div class="mb-4">
                 <label for="formations" class="block text-sm font-medium text-gray-700">Formations</label>
                 <select id="formations" name="formations[]" multiple class="w-full px-4 py-2 border rounded-md">

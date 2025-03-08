@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <div class="flex h-screen bg-gray-100">
+    <div class="flex min-h-screen bg-gray-100">
         <!-- Sidebar -->
         <aside class="w-64 bg-gray-800 text-white p-4">
             <div class="p-4 border-b">
@@ -20,6 +20,9 @@
                     @endcan
                     @can('manage_formations')
                      <li><a href="{{ route('formations.index') }}" class="block py-2 hover:bg-gray-700">Manage Formations</a></li> 
+                     <a href="{{ route('recuperations.index_rh') }}" class="block py-2 hover:bg-gray-700">
+                        Valider les demandes de récupération
+                    </a>
                      @endcan
                      @can('manage_departments')
                     <li><a href="{{ route('departments.index') }}" class="block py-2 hover:bg-gray-700">Manage Departments</a></li>
@@ -36,6 +39,11 @@
                     <li><a href="{{ route('employes.organigramme') }}" class="block py-2 hover:bg-gray-700">Organigramme</a></li>
                     @endcan
                     <li><a href="{{ route('conges.create') }}" class="block py-2 hover:bg-gray-700">Demander conge</a></li>
+                    <li><a href="{{ route('conges.index_employe') }}" class="block py-2 hover:bg-gray-700">Mes conges</a></li>
+                    <li><a href="{{ route('conges.solde') }}" class="block py-2 hover:bg-gray-700">Mon espace personnelle</a></li>
+                    <a href="{{ route('recuperations.create') }}" class="btn btn-primary">
+                        Créer une nouvelle demande de récupération
+                    </a>
                     
                 </ul>
             </nav>
@@ -88,4 +96,5 @@
             </div>
         </main>
     </div>
-
+</body>
+</html>
